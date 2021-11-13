@@ -27,6 +27,7 @@ int BitsIO::InputBit()
                 std::cout << "Bad Input Files. \n";
                 exit(-1);
             }
+            return 0;
         }
         fread(&buffer, 1, 1, inputFile);
         bitsToGo = 8;

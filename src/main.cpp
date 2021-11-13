@@ -1,11 +1,13 @@
 #include"bitsIO.h"
 #include"arithmetic_coding.h"
 #include"fixed_model.h"
+#include"adaptive_model.h"
 #include<iostream>
 
 int main(int argc, char** argv)
 {
-    FixedModel* pModel     = new FixedModel();
+    //Model* pModel     = new FixedModel();
+    Model* pModel = new AdaptiveModel();
     BitsIO* pOutputBin     = new BitsIO();
     ArithmeticCoding* pEnc = new ArithmeticCoding(pOutputBin);
 
@@ -21,7 +23,7 @@ int main(int argc, char** argv)
         if (ch == 10) break;
         symbol = pModel->charToIndex[ch];
         pEnc->encodeSymbol(symbol, pModel->cumFreq);
-        pModel->updateMode();
+        pModel->updateMode(symbol);
     }
     pEnc->encodeSymbol(EOF_SYMBOLS, pModel->cumFreq);
     pEnc->doneEncoding();
@@ -29,8 +31,11 @@ int main(int argc, char** argv)
 
     delete pOutputBin;
     delete pEnc;
+    delete pModel;
+    pModel = new AdaptiveModel();
     pOutputBin = new BitsIO();
     pEnc = new ArithmeticCoding(pOutputBin);
+    pModel->startModel();
     pOutputBin->StartInputBits();
     pEnc->StartDecoding();
     while (true)
@@ -41,7 +46,7 @@ int main(int argc, char** argv)
         if (symbol == EOF_SYMBOLS) break;
         ch = pModel->indexToChar[symbol];
         std::cout << ch;
-        pModel->updateMode();
+        pModel->updateMode(symbol);
     }
 
     return 0;

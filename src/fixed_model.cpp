@@ -1,7 +1,7 @@
 #include "fixed_model.h"
 #include<iostream>
 
-const int freq[NO_OF_SYMBOLS + 1] = {
+int freqFixModel[NO_OF_SYMBOLS + 1] = {
     0,
     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
@@ -32,6 +32,7 @@ const int freq[NO_OF_SYMBOLS + 1] = {
 
 void FixedModel::startModel()
 {
+    memcpy(freq, freqFixModel, sizeof(freqFixModel));
     for (int i = 0; i < NO_OF_CHARS; i++)
     {
         charToIndex[i]     = i + 1;
@@ -46,4 +47,4 @@ void FixedModel::startModel()
     if (cumFreq[0] > MAX_FREQUENCY) exit(-1);
 }
 
-void FixedModel::updateMode() {}
+void FixedModel::updateMode(int symbol) {}

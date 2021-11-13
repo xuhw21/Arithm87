@@ -32,7 +32,7 @@ public:
     void StartOutputBits()
     {
         buffer   = 0;
-        bitsToGo =8;
+        bitsToGo = 8;
     }
 
     void outputBit(int bit);
