@@ -4,7 +4,8 @@
 #define __MODEL__
 
 #define NO_OF_CHARS 256                 // Number of character symbols.
-#define EOF_SYMBOLS  (NO_OF_CHARS + 1)  // Index of EOF symbol
+#define EOF_OF_CHARS 255                 // EOF of character symbols.
+#define EOF_SYMBOLS  NO_OF_CHARS  // Index of EOF symbol
 
 #define NO_OF_SYMBOLS (NO_OF_CHARS + 1) // Total number of symbols
 
@@ -13,6 +14,7 @@
 
 class Model {
 public:
+    virtual ~Model() {};
     virtual void startModel() = 0;
     virtual void updateMode(int symbol) = 0;
 
