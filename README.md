@@ -1,0 +1,2 @@
+# Arithm87
+Implementation of paper ARITHMETIC CODEING FOR DATA COMPRESSION
